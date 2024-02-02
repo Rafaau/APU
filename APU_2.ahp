@@ -1,0 +1,116 @@
+Version: 1.0
+#####################################
+# Alternatives Section
+Alternatives:
+  &alternatives
+  MacBook 1:
+    ekran: 13
+    pamiec_RAM: 8
+    dysk: 128
+    cena: 3500
+    liczba_opinii: 20
+  MacBook 2:
+    ekran: 13
+    pamiec_RAM: 8
+    dysk: 128
+    cena: 4000
+    liczba_opinii: 30
+  MacBook 3:
+    ekran: 14
+    pamiec_RAM: 16
+    dysk: 256
+    cena: 4500
+    liczba_opinii: 40
+  MacBook 4:
+    ekran: 14
+    pamiec_RAM: 16
+    dysk: 256
+    cena: 5000
+    liczba_opinii: 20
+  MacBook 5:
+    ekran: 14
+    pamiec_RAM: 16
+    dysk: 512
+    cena: 5500
+    liczba_opinii: 30
+  MacBook 6:
+    ekran: 15
+    pamiec_RAM: 32
+    dysk: 512
+    cena: 6000
+    liczba_opinii: 40
+  MacBook 7:
+    ekran: 15
+    pamiec_RAM: 32
+    dysk: 512
+    cena: 6500
+    liczba_opinii: 5
+  MacBook 8:
+    ekran: 15
+    pamiec_RAM: 32
+    dysk: 1024
+    cena: 7000
+    liczba_opinii: 10
+  MacBook 9:
+    ekran: 16
+    pamiec_RAM: 64
+    dysk: 1024
+    cena: 7500
+    liczba_opinii: 50
+  MacBook 10:
+    ekran: 16
+    pamiec_RAM: 64
+    dysk: 2048
+    cena: 8000
+    liczba_opinii: 15
+#End of Alternatives Section
+#####################################
+#Goal Section
+
+Goal:
+  name: Zakup MacBooka
+  preferences:
+    - [Wydajnosc, Cena, 1/7]
+    - [Wydajnosc, Ekran, 7]
+    - [Wydajnosc, Pamiec_RAM, 9]
+    - [Wydajnosc, Dysk, 9]
+    - [Wydajnosc, Liczba_opinii, 1/8]
+    - [Cena, Ekran, 1/7]
+    - [Cena, Pamiec_RAM, 1/9]
+    - [Cena, Dysk, 1/9]
+    - [Cena, Liczba_opinii, 7]
+    - [Ekran, Pamiec_RAM, 1/8]
+    - [Ekran, Dysk, 1/8]
+    - [Ekran, Liczba_opinii, 1/9]
+    - [Pamiec_RAM, Dysk, 9]
+    - [Pamiec_RAM, Liczba_opinii, 1/8]
+    - [Dysk, Liczba_opinii, 1/7]
+  children:
+    Wydajnosc:
+      preferences:
+        - [Ekran, Pamiec_RAM, 9]
+        - [Ekran, Dysk, 9]
+        - [Pamiec_RAM, Dysk, 7]
+      children:
+        Ekran:
+          preferenceFunction:
+            function(a1, a2) min(9, max(1/9, a1$ekran/a2$ekran))
+          children: *alternatives
+        Pamiec_RAM:
+          preferenceFunction:
+            function(a1, a2) min(9, max(1/9, a1$pamiec_RAM/a2$pamiec_RAM))
+          children: *alternatives
+        Dysk:
+          preferenceFunction:
+            function(a1, a2) min(7, max(1/7, a1$dysk/a2$dysk))
+          children: *alternatives
+    Cena:
+      preferenceFunction:
+        function(a1, a2) min(7, max(1/7, a1$cena/a2$cena))
+      children: *alternatives
+    Liczba_opinii:
+      preferenceFunction:
+        function(a1, a2) min(8, max(1/8, a1$liczba_opinii/a2$liczba_opinii))
+      children: *alternatives
+# End of Goal Section
+#####################################
